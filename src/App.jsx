@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
+import { Result } from './components/Result'
 
 export default function App() {
   const location = useLocation()
@@ -66,7 +67,7 @@ function Length() {
   console.log(medidas)
   return (
     <Card className='flex flex-col gap-5 my-10 w-full opacity-90'>
-      <form className='flex flex-col gap-5'>
+      <form className='flex flex-col gap-5' method='post'>
         <Title>Enter to length convert</Title>
         <TextInput name='value' placeholder='Enter to length' />
         <Title>Unit to Convert from</Title>

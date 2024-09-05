@@ -13,7 +13,7 @@ export default function Temperature() {
   return (
     <>
       <Card className='flex flex-col gap-5 my-10 w-full opacity-90'>
-        <form className='flex flex-col gap-5'>
+        <form className='flex flex-col gap-5' method='post'>
           <Title>Enter to temperature convert</Title>
           <TextInput name='value' placeholder='Enter to temperature' />
           <Title>Unit to Convert from</Title>
@@ -32,7 +32,9 @@ export default function Temperature() {
               </SelectItem>
             ))}
           </Select>
-          <Button className='delay-50 duration-700 transition-all'>Convert</Button>
+          <Button className='delay-50 duration-700 transition-all' type='submit'>
+            Convert
+          </Button>
         </form>
       </Card>
     </>
