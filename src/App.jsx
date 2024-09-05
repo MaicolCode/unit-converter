@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { Result } from './components/Result'
+import { getResult } from './services/resultConvert'
 
 export default function App() {
   const location = useLocation()
@@ -64,10 +65,28 @@ function Length() {
       .then(res => res.json())
       .then(data => setMedidas(data))
   }, [])
-  console.log(medidas)
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    const value = formData.get('value')
+    const from = formData.get('from')
+    const to = formData.get('to')
+
+    const operationLenght = { value, from, to }
+    const dataJSON = JSON.stringify(operationLenght)
+    const result = await getResult(dataJSON, 'length')
+
+    form.reset()
+
+    console.log(result)
+  }
+
   return (
     <Card className='flex flex-col gap-5 my-10 w-full opacity-90'>
-      <form className='flex flex-col gap-5' method='post'>
+      <form className='flex flex-col gap-5' method='post' onSubmit={handleSubmit}>
         <Title>Enter to length convert</Title>
         <TextInput name='value' placeholder='Enter to length' />
         <Title>Unit to Convert from</Title>
