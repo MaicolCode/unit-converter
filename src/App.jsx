@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
 import clsx from 'clsx'
+import { useEffect, useState } from 'react'
 
 export default function App() {
   const location = useLocation()
@@ -56,24 +57,33 @@ export default function App() {
 }
 
 function Length() {
+  const [medidas, setMedidas] = useState([])
+  useEffect(() => {
+    fetch('http://localhost:3000/')
+      .then(res => res.json())
+      .then(data => setMedidas(data))
+  }, [])
+  console.log(medidas)
   return (
     <Card className='flex flex-col gap-5 my-10 w-full opacity-90'>
       <form className='flex flex-col gap-5'>
-        <Title>Enter to Length convert</Title>
+        <Title>Enter to length convert</Title>
         <TextInput name='value' placeholder='Enter to length' />
         <Title>Unit to Convert from</Title>
-        <Select placeholder='Select from...'>
-          <SelectItem value='kg'>kg</SelectItem>
-          <SelectItem value='m'>m</SelectItem>
-          <SelectItem value='cm'>cm</SelectItem>
-          <SelectItem value='mm'>mm</SelectItem>
+        <Select name='from' placeholder='Select from...'>
+          {medidas.map(medida => (
+            <SelectItem key={medida} value={medida}>
+              {medida}
+            </SelectItem>
+          ))}
         </Select>
         <Title htmlFor=''>Unit to Convert to</Title>
-        <Select placeholder='Select to...'>
-          <SelectItem value='kg'>kg</SelectItem>
-          <SelectItem value='m'>m</SelectItem>
-          <SelectItem value='cm'>cm</SelectItem>
-          <SelectItem value='mm'>mm</SelectItem>
+        <Select name='to' placeholder='Select to...'>
+          {medidas.map(medida => (
+            <SelectItem key={medida} value={medida}>
+              {medida}
+            </SelectItem>
+          ))}
         </Select>
         <Button className='delay-50 duration-700 transition-all'>Convert</Button>
       </form>
