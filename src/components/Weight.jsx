@@ -3,6 +3,7 @@ import { Select } from '@tremor/react'
 import { Card, TextInput, Title, Button } from '@tremor/react'
 import { useEffect, useState } from 'react'
 import { getResult } from '../services/resultConvert'
+import { toast } from 'sonner'
 
 export default function Weight() {
   const [medidas, setMedidas] = useState([])
@@ -27,7 +28,7 @@ export default function Weight() {
 
     form.reset()
 
-    console.log(result)
+    toast.success(result)
   }
   return (
     <>

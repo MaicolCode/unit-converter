@@ -3,6 +3,7 @@ import { Select } from '@tremor/react'
 import { Card, TextInput, Title, Button } from '@tremor/react'
 import { useEffect, useState } from 'react'
 import { getResult } from '../services/resultConvert'
+import { toast } from 'sonner'
 
 export default function Temperature() {
   const [medidas, setMedidas] = useState([])
@@ -26,7 +27,7 @@ export default function Temperature() {
     const result = await getResult(dataJSON, 'temperature')
 
     form.reset()
-    console.log(result)
+    toast.success(result)
   }
 
   return (
