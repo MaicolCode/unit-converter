@@ -1,18 +1,10 @@
-import { SelectItem } from '@tremor/react'
-import { Select } from '@tremor/react'
-import { Card, TextInput, Title, Button } from '@tremor/react'
-import { useEffect, useState } from 'react'
+import { Card, TextInput, Title, Button, Select, SelectItem } from '@tremor/react'
 import { getResult } from '../services/resultConvert'
 import { toast } from 'sonner'
+import { useMeasures } from '../hooks/useMeasures'
 
 export default function Temperature() {
-  const [medidas, setMedidas] = useState([])
-  useEffect(() => {
-    fetch('http://localhost:3000/temperature')
-      .then(res => res.json())
-      .then(data => setMedidas(data))
-  }, [])
-
+  const { medidas } = useMeasures({ type: 'temperature' })
   const handleSubmit = async e => {
     e.preventDefault()
     const form = e.currentTarget

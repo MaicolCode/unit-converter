@@ -1,16 +1,10 @@
-import { useEffect, useState } from 'react'
 import { getResult } from '../services/resultConvert'
-import { SelectItem } from '@tremor/react'
-import { Card, TextInput, Title, Button, Select } from '@tremor/react'
+import { Card, TextInput, Title, Button, Select, SelectItem } from '@tremor/react'
 import { toast } from 'sonner'
+import { useMeasures } from '../hooks/useMeasures'
 
 export function Length() {
-  const [medidas, setMedidas] = useState([])
-  useEffect(() => {
-    fetch('http://localhost:3000/')
-      .then(res => res.json())
-      .then(data => setMedidas(data))
-  }, [])
+  const { medidas } = useMeasures({ type: '' })
 
   const handleSubmit = async e => {
     e.preventDefault()
