@@ -68,7 +68,7 @@ export default {
           },
           content: {
             subtle: colors.zinc[700],
-            DEFAULT: colors.zinc[500],
+            DEFAULT: colors.zinc[200],
             emphasis: colors.gray[200],
             strong: colors.gray[50],
             inverted: colors.gray[950]

@@ -1,6 +1,7 @@
 import express, { urlencoded } from 'express'
 import { getJSON } from './utils/getJSON.js'
 import cors from 'cors'
+import { convertLength } from './utils/operations/lengthOpertations.js'
 
 const medidas = getJSON('../mooks/medidas.json')
 
@@ -27,7 +28,9 @@ app.get('/temperature', (req, res) => {
 })
 
 app.post('/length/result', (req, res) => {
-  console.log(req.body)
+  const { value, from, to } = req.body
+  const result = convertLength(value, from, to)
+  console.log(result)
   res.send(JSON.stringify('LLego una peticion'))
 })
 
