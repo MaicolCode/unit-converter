@@ -1,3 +1,7 @@
+/***
+  Contantes para la conversión de Distancias.
+***/
+
 export const yardaConvertions = {
   km: 0.0009144,
   hm: 0.009144,
@@ -48,4 +52,22 @@ export const millasConvertions = {
   yd: 1760, // 1 milla = 1760 yardas
   ft: 5280, // 1 milla = 5280 pies
   in: 63360 // 1 milla = 63360 pulgadas
+}
+
+/***
+  Contantes para la conversión de masas.
+***/
+
+export const onzasConvertions = {
+  g: 28.3495,
+  kg: 0.0283495,
+  mg: 28349.5,
+  lb: 16 // 1 libra = 16 onzas
+}
+
+export const librasConvertions = {
+  g: 453.592,
+  kg: 0.453592,
+  mg: 453592,
+  oz: 16 // 1 libra = 16 onzas
 }

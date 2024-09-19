@@ -23,7 +23,11 @@ export function Length() {
     //console.log(selectOptions.selectedIndex)
     form.reset()
 
-    toast.success(result)
+    if (result === 'Success!') {
+      toast.success('Your peticion is done!')
+    } else {
+      toast.error('Your peticion is not done!')
+    }
   }
 
   return (

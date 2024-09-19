@@ -21,7 +21,11 @@ export default function Weight() {
 
     form.reset()
 
-    toast.success(result)
+    if (result === 'Success!') {
+      toast.success('Your peticion is done!')
+    } else {
+      toast.error('Your peticion is not done!')
+    }
   }
   return (
     <>
@@ -30,21 +34,33 @@ export default function Weight() {
           <Title>Enter to weight convert</Title>
           <TextInput name='value' placeholder='Enter to weight' />
           <Title>Unit to Convert from</Title>
-          <Select name='from' placeholder='Select from...'>
+          <select
+            name='from'
+            className='optionsFrom bg-zinc-900 w-full h-10 rounded-lg border-1 border-zinc-800 text-sm '
+          >
+            <option autoFocus className='hidden text-zinc-800'>
+              Select from...
+            </option>
             {medidas.map(medida => (
-              <SelectItem key={medida} value={medida}>
+              <option key={medida} value={medida}>
                 {medida}
-              </SelectItem>
+              </option>
             ))}
-          </Select>
+          </select>
           <Title htmlFor=''>Unit to Convert to</Title>
-          <Select name='to' placeholder='Select to...'>
+          <select
+            name='to'
+            className='optionsTo bg-zinc-900 w-full h-10 rounded-lg border-1 border-zinc-800 text-sm '
+          >
+            <option autoFocus className='hidden text-zinc-800'>
+              Select to...
+            </option>
             {medidas.map(medida => (
-              <SelectItem key={medida} value={medida}>
+              <option key={medida} value={medida}>
                 {medida}
-              </SelectItem>
+              </option>
             ))}
-          </Select>
+          </select>
           <Button className='delay-50 duration-700 transition-all' type='submit'>
             Convert
           </Button>

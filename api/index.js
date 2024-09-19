@@ -3,6 +3,7 @@ import { getJSON } from './utils/getJSON.js'
 import cors from 'cors'
 import { convertLength } from './utils/operations/lengthOpertations.js'
 import { convertTemperature } from './utils/operations/temperatureOperations.js'
+import { convertWeight } from './utils/operations/weightOperations.js'
 
 const medidas = getJSON('../mooks/medidas.json')
 
@@ -40,8 +41,14 @@ app.post('/length/result', (req, res) => {
 })
 
 app.post('/weight/result', (req, res) => {
-  console.log(req.body)
-  res.send(JSON.stringify('Success!'))
+  try {
+    const { value, from, to } = req.body
+    const weightResult = convertWeight(value, from, to)
+    console.log(weightResult)
+    res.send(JSON.stringify('Success!'))
+  } catch (error) {
+    res.send(JSON.stringify('Error'))
+  }
 })
 
 app.post('/temperature/result', (req, res) => {
