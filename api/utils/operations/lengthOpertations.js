@@ -6,7 +6,6 @@ import {
 } from '../consts.js'
 
 const equivalentesComunes = ['km', 'hm', 'dam', 'm', 'dm', 'cm', 'mm']
-const equivalentesRaros = ['yd', 'ft', 'mi', 'in']
 
 function convertLength(value, from, to) {
   const fromIndex = equivalentesComunes.indexOf(from)
@@ -81,6 +80,7 @@ function convertLength(value, from, to) {
     }
     return value
   }
+
   if (fromIndex > toIndex) {
     for (let i = 0; i < recorrido.length; i++) {
       value /= 10

@@ -1,4 +1,4 @@
-import { Card, TextInput, Title, Button, Select, SelectItem } from '@tremor/react'
+import { Card, TextInput, Title, Button } from '@tremor/react'
 import { getResult } from '../services/resultConvert'
 import { toast } from 'sonner'
 import { useMeasures } from '../hooks/useMeasures'
@@ -19,31 +19,51 @@ export default function Temperature() {
     const result = await getResult(dataJSON, 'temperature')
 
     form.reset()
-    toast.success(result)
+    if (result === 'Success!') {
+      toast.success('Your peticion is done!')
+    } else {
+      toast.error('Your peticion is not done!')
+    }
   }
 
   return (
     <>
       <Card className='flex flex-col gap-5 my-10 w-full opacity-90'>
-        <form className='flex flex-col gap-5' method='post' onSubmit={handleSubmit}>
+        <form
+          className='flex flex-col gap-5 text-zinc-200'
+          method='post'
+          onSubmit={handleSubmit}
+        >
           <Title>Enter to temperature convert</Title>
           <TextInput name='value' placeholder='Enter to temperature' />
           <Title>Unit to Convert from</Title>
-          <Select name='from' placeholder='Select from...'>
+          <select
+            name='from'
+            className='optionsFrom bg-zinc-900 w-full h-10 rounded-lg border-1 border-zinc-800 text-sm '
+          >
+            <option autoFocus className='hidden'>
+              Select from...
+            </option>
             {medidas.map(medida => (
-              <SelectItem key={medida} value={medida}>
+              <option key={medida} value={medida}>
                 {medida}
-              </SelectItem>
+              </option>
             ))}
-          </Select>
+          </select>
           <Title htmlFor=''>Unit to Convert to</Title>
-          <Select name='to' placeholder='Select to...'>
+          <select
+            name='to'
+            className='optionsTo bg-zinc-900 w-full h-10 rounded-lg border-1 border-zinc-800 text-sm '
+          >
+            <option autoFocus className='hidden'>
+              Select to...
+            </option>
             {medidas.map(medida => (
-              <SelectItem key={medida} value={medida}>
+              <option key={medida} value={medida}>
                 {medida}
-              </SelectItem>
+              </option>
             ))}
-          </Select>
+          </select>
           <Button className='delay-50 duration-700 transition-all' type='submit'>
             Convert
           </Button>

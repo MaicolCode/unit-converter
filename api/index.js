@@ -1,7 +1,8 @@
-import express, { urlencoded } from 'express'
+import express from 'express'
 import { getJSON } from './utils/getJSON.js'
 import cors from 'cors'
 import { convertLength } from './utils/operations/lengthOpertations.js'
+import { convertTemperature } from './utils/operations/temperatureOperations.js'
 
 const medidas = getJSON('../mooks/medidas.json')
 
@@ -28,19 +29,30 @@ app.get('/temperature', (req, res) => {
 })
 
 app.post('/length/result', (req, res) => {
-  const { value, from, to } = req.body
-  const result = convertLength(value, from, to)
-  console.log(result)
-  res.send(JSON.stringify('LLego una peticion'))
+  try {
+    const { value, from, to } = req.body
+    const lengthResult = convertLength(value, from, to)
+    console.log(lengthResult)
+    res.send(JSON.stringify('Success!'))
+  } catch (error) {
+    res.send(JSON.stringify('Error'))
+  }
 })
 
 app.post('/weight/result', (req, res) => {
   console.log(req.body)
-  res.send(JSON.stringify('LLego una peticion'))
+  res.send(JSON.stringify('Success!'))
 })
+
 app.post('/temperature/result', (req, res) => {
-  console.log(req.body)
-  res.send(JSON.stringify('LLego una peticion'))
+  try {
+    const { value, from, to } = req.body
+    const temperatureResult = convertTemperature(value, from, to)
+    console.log(temperatureResult)
+    res.send(JSON.stringify('Success!'))
+  } catch (error) {
+    res.send(JSON.stringify('Error'))
+  }
 })
 
 app.listen(port, () => {
