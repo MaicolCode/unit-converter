@@ -10,6 +10,8 @@ const medidas = getJSON('../mooks/medidas.json')
 const app = express()
 const port = process.env.PORT ?? 3000
 
+let resultConvert
+
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json({ type: '*/*' }))
@@ -33,7 +35,8 @@ app.post('/length/result', (req, res) => {
   try {
     const { value, from, to } = req.body
     const lengthResult = convertLength(value, from, to)
-    console.log(lengthResult)
+    resultConvert = { value, from, to, total: lengthResult }
+
     res.send(JSON.stringify('Success!'))
   } catch (error) {
     res.send(JSON.stringify('Error'))
@@ -44,7 +47,7 @@ app.post('/weight/result', (req, res) => {
   try {
     const { value, from, to } = req.body
     const weightResult = convertWeight(value, from, to)
-    console.log(weightResult)
+    resultConvert = { value, from, to, total: weightResult }
     res.send(JSON.stringify('Success!'))
   } catch (error) {
     res.send(JSON.stringify('Error'))
@@ -55,11 +58,15 @@ app.post('/temperature/result', (req, res) => {
   try {
     const { value, from, to } = req.body
     const temperatureResult = convertTemperature(value, from, to)
-    console.log(temperatureResult)
+    resultConvert = { value, from, to, total: temperatureResult }
     res.send(JSON.stringify('Success!'))
   } catch (error) {
     res.send(JSON.stringify('Error'))
   }
+})
+
+app.get('/result', (req, res) => {
+  res.send({ result: resultConvert })
 })
 
 app.listen(port, () => {

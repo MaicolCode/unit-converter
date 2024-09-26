@@ -8,3 +8,9 @@ export const getResult = async (values, type) => {
   const resp = await result.json()
   return resp
 }
+
+export const getResultConvert = async () => {
+  const result = await fetch(`http://localhost:3000/result`)
+  const resp = await result.json()
+  return resp
+}

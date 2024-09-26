@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import { Result } from './components/Result'
 import { Length } from './components/Length'
 import { Toaster } from 'sonner'
+import { getResultConvert } from './services/resultConvert'
 
 export default function App() {
   const location = useLocation()
@@ -51,6 +52,7 @@ export default function App() {
           </ul>
         </nav>
         <div>{location.pathname === '/' ? <Length /> : <Outlet />}</div>
+
         <Toaster richColors position='top-right' theme='dark' />
       </section>
     </main>
